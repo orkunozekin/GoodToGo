@@ -1,0 +1,10 @@
+.add-item-form {
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.add-item-form input {
+    margin-bottom: 15px;
+}

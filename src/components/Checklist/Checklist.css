@@ -1,0 +1,12 @@
+.checklist-wrapper li {
+    list-style-type: none;
+    display: flex;
+    justify-content: ;
+    align-items: center;
+}
+
+
+.trash-icon {
+    float: right;
+    width: 100%;
+}

@@ -60,13 +60,13 @@ const Checklist = (props) => {
                     {items.map((item, index) =>
                         <li key={item.id}>
                             <b>{item.name}</b>
-                            <div className="trash-icon"><AiFillDelete onClick={() => deleteItems(item.id)}/></div>
+                            <div className="trash-icon-wrapper"><AiFillDelete onClick={() => deleteItems(item.id)}/></div>
                         </li>
                     )}
                 </ul>
             </form>
             <NavLink to="/add">
-                <h3>Add More Items</h3>
+                <button className="add-btn">Add More Items</button>
             </NavLink>
         </section>
     )

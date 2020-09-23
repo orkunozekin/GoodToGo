@@ -1,3 +1,5 @@
+
+
 .checklist-wrapper li {
     list-style-type: none;
     display: flex;
@@ -6,7 +8,21 @@
 }
 
 
-.trash-icon {
+.trash-icon-wrapper {
     float: right;
     width: 100%;
+}
+
+svg {
+    float: right;
+    margin-right: 35px;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 20vw;
+    background-color: darkslateblue;
+    color: wheat;
 }

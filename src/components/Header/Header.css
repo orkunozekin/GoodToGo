@@ -1,5 +1,11 @@
 .header {
     display: flex;
     flex-flow: column nowrap;
-    border: 1px solid black;
+
 }
+
+a {
+    text-decoration: none;
+    color: red;
+}
+

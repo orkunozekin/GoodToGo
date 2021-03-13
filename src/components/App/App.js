@@ -14,8 +14,8 @@ class App extends React.Component {
     return (
       <main className="App">
         <Header />
-        <Route exact path='/' component={() => <Checklist getItems={this.getItems} />} />
-        <Route exact path='/add' component={() => <AddItem addToList={this.addToList} />} />
+        <Route exact path='/' component = {Checklist}/>
+        <Route exact path='/add' component= {AddItem} />
       </main>
     );
   }

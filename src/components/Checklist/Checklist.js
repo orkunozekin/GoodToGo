@@ -42,7 +42,7 @@ const Checklist = (props) => {
                 const newItemsList = items.filter(item => item.id !== itemId)
                 setItems(newItemsList)
             })
-            .catch(error =>  console.log(error))
+            .catch(error => console.log(error))
     }
 
 
@@ -58,9 +58,8 @@ const Checklist = (props) => {
             <form>
                 <ul>
                     {items.map((item, index) =>
-                        <li key={item.id}>
-                            <b>{item.name}</b>
-                            <div className="trash-icon-wrapper"><AiFillDelete onClick={() => deleteItems(item.id)}/></div>
+                        <li key={item.id}><b>{item.name}</b>
+                            <AiFillDelete onClick={() => deleteItems(item.id)} />
                         </li>
                     )}
                 </ul>

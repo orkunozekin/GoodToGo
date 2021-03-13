@@ -1,28 +1,21 @@
+ .checklist-wrapper>li {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+ }
 
+ svg {
+     cursor: pointer;
+     float: right;
+     margin-right: 35px;
+ }
 
-.checklist-wrapper li {
-    list-style-type: none;
-    display: flex;
-    justify-content: ;
-    align-items: center;
-}
-
-
-.trash-icon-wrapper {
-    float: right;
-    width: 100%;
-}
-
-svg {
-    float: right;
-    margin-right: 35px;
-}
-
-button {
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 20px;
-    margin-top: 20vw;
-    background-color: darkslateblue;
-    color: wheat;
-}
+ button {
+     cursor: pointer;
+     border-radius: 5px;
+     font-size: 20px;
+     margin-top: 20vw;
+     background-color: darkslateblue;
+     color: wheat;
+ }

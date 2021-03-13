@@ -46,10 +46,10 @@ const Checklist = (props) => {
     }
 
 
-    const checkOffItems = (itemId) => {
-        const newItemsList = items.filter(item => item.id !== itemId)
-        setItems(newItemsList)
-    }
+    // const checkOffItems = (itemId) => {
+    //     const newItemsList = items.filter(item => item.id !== itemId)
+    //     setItems(newItemsList)
+    // }
 
     console.log(items)
 

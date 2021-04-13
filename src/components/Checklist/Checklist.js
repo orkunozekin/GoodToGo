@@ -15,7 +15,7 @@ const Checklist = (props) => {
 
 
     const getItems = () => { //get all the items from the server
-        return fetch(config.API_ENDPOINT)
+        return fetch(`${config.API_ENDPOINT}/allItems`)
             .then(res =>
                 (!res.ok)
                     ? res.json().then(e => Promise.reject(e))
@@ -23,6 +23,7 @@ const Checklist = (props) => {
             )
             .then(data => setItems(data))
             .catch(error => console.log(error))
+
     }
 
 
@@ -58,8 +59,8 @@ const Checklist = (props) => {
             <form>
                 <ul>
                     {items.map((item, index) =>
-                        <li key={item.id}><b>{item.name}</b>
-                            <AiFillDelete onClick={() => deleteItems(item.id)} />
+                        <li key={index}><b>{item.itemName}</b>
+                            <AiFillDelete key={index} onClick={() => deleteItems(item.id)} />
                         </li>
                     )}
                 </ul>

@@ -1,3 +1,3 @@
 export default {
-    API_ENDPOINT: "http://localhost:8080"
+    API_ENDPOINT: "https://cryptic-crag-32286.herokuapp.com/"
 };

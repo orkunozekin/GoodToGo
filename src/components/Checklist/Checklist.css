@@ -9,6 +9,7 @@
      cursor: pointer;
      float: right;
      margin-right: 35px;
+     object-fit: contain;
  }
 
  button {

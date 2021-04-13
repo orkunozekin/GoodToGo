@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import './AddItem.css';
 import config from '../../config';
 import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 const AddItem = (props) => {
+
+  let history = useHistory();
 
   const [item, setItem] = useState({ // to control the input
     value: '',
     touched: false
   })
+
+  const [loading, setLoading] = useState(false);
 
   const itemOnChange = (newItem) => { // when user adds this, add 
     setItem({ value: newItem, touched: true })
@@ -17,11 +22,11 @@ const AddItem = (props) => {
 
   const addToList = (e, item) => {
     e.preventDefault();
+
     const newItem = {
       itemName: item,
       itemType: null
     };
-    console.log(newItem);
     fetch(`${config.API_ENDPOINT}/newItem`, {
       method: 'POST',
       body: JSON.stringify(newItem),
@@ -32,7 +37,7 @@ const AddItem = (props) => {
       .then(res => {
         return res.json();
       })
-    props.history.push('/');
+    history.push('/');
   }
 
   return (
@@ -45,4 +50,4 @@ const AddItem = (props) => {
   )
 }
 
-export default withRouter(AddItem);
+export default AddItem;

@@ -4,33 +4,32 @@ import { NavLink } from 'react-router-dom';
 import config from '../../config';
 import { AiFillDelete } from 'react-icons/ai';
 
-const Checklist = (props) => {
+const Checklist = ({ items, setItems }) => {
 
-    const [items, setItems] = useState([])
 
-    useEffect(() => { //componentDidMount
-        getItems();
+    useEffect(() => {
+        async function getItemsHelper() {
+            await getItems();
+        }
+
+        getItemsHelper();
     }, [])
 
 
-
-    const getItems = () => { //get all the items from the server
-        return fetch(`${config.API_ENDPOINT}/allItems`)
-            .then(res =>
-                (!res.ok)
-                    ? res.json().then(e => Promise.reject(e))
-                    : res.json()
-            )
-            .then(data => setItems(data))
-            .catch(error => console.log(error))
-
+    //get all the items from the server
+    const getItems = async () => {
+        const request = await fetch(`${config.API_ENDPOINT}/allItems`);
+        const data = await request.json();
+        console.log("list of items: ", data);
+        setItems(data);
+        return data;
     }
 
 
-
-    const deleteItems = (itemId) => { //delete an item whose trashcan icon is clicked.
+    //delete an item whose trashcan icon is clicked.
+    const deleteItems = (itemId) => {
         console.log(itemId)
-        return fetch(`${config.API_ENDPOINT}/${itemId}`, {
+        return fetch(`${config.API_ENDPOINT}item/${itemId}`, {
             method: 'DELETE',
             headers: { 'content-type': 'application/json' },
         })
@@ -40,7 +39,7 @@ const Checklist = (props) => {
                 }
             })
             .then(() => {
-                const newItemsList = items.filter(item => item.id !== itemId)
+                const newItemsList = items.filter(item => item.itemId !== itemId)
                 setItems(newItemsList)
             })
             .catch(error => console.log(error))
@@ -52,15 +51,14 @@ const Checklist = (props) => {
     //     setItems(newItemsList)
     // }
 
-    console.log(items)
 
     return (
         <section className="checklist-wrapper">
             <form>
                 <ul>
-                    {items.map((item, index) =>
+                    {items && items.map((item, index) =>
                         <li key={index}><b>{item.itemName}</b>
-                            <AiFillDelete key={index} onClick={() => deleteItems(item.id)} />
+                            <AiFillDelete key={index} onClick={() => deleteItems(item.itemId)} />
                         </li>
                     )}
                 </ul>

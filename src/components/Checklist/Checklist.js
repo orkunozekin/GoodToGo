@@ -8,11 +8,8 @@ const Checklist = ({ items, setItems }) => {
 
 
     useEffect(() => {
-        async function getItemsHelper() {
-            await getItems();
-        }
-        getItemsHelper();
-    }, [items])
+        getItems()
+    })
 
 
     //get all the items from the server
@@ -21,7 +18,6 @@ const Checklist = ({ items, setItems }) => {
         const data = await request.json();
         console.log("list of items: ", data);
         setItems(data);
-        return data;
     }
 
 

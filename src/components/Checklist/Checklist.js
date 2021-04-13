@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Checklist.css';
 import { NavLink } from 'react-router-dom';
 import config from '../../config';
@@ -11,9 +11,8 @@ const Checklist = ({ items, setItems }) => {
         async function getItemsHelper() {
             await getItems();
         }
-
         getItemsHelper();
-    }, [])
+    }, [items])
 
 
     //get all the items from the server

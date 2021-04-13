@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './AddItem.css';
 import config from '../../config';
-import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 
@@ -14,7 +13,7 @@ const AddItem = (props) => {
     touched: false
   })
 
-  const [loading, setLoading] = useState(false);
+  
 
   const itemOnChange = (newItem) => { // when user adds this, add 
     setItem({ value: newItem, touched: true })

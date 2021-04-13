@@ -8,17 +8,17 @@ const Checklist = ({ items, setItems }) => {
 
 
     useEffect(() => {
+        const getItems = async () => {
+            const request = await fetch(`${config.API_ENDPOINT}/allItems`);
+            const data = await request.json();
+            console.log("list of items: ", data);
+            setItems(data);
+        }
+
         getItems()
-    })
+        // eslint-disable-next-line
+    }, [])
 
-
-    //get all the items from the server
-    const getItems = async () => {
-        const request = await fetch(`${config.API_ENDPOINT}/allItems`);
-        const data = await request.json();
-        console.log("list of items: ", data);
-        setItems(data);
-    }
 
 
     //delete an item whose trashcan icon is clicked.
@@ -49,7 +49,7 @@ const Checklist = ({ items, setItems }) => {
 
     return (
         <section className="checklist-wrapper">
-            <form>
+            {items.length ? <form>
                 <ul>
                     {items && items.map((item, index) =>
                         <li key={index}><b>{item.itemName}</b>
@@ -57,11 +57,15 @@ const Checklist = ({ items, setItems }) => {
                         </li>
                     )}
                 </ul>
-            </form>
+            </form> :
+                <h2>List Empty</h2>
+            }
+
             <NavLink to="/add">
                 <button className="add-btn">Add More Items</button>
             </NavLink>
         </section>
+
     )
 }
 

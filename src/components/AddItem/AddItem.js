@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './AddItem.css';
 import config from '../../config';
 import { useHistory } from 'react-router-dom';
+import ls from '../../Utility/LocalStorage'
 
 
-const AddItem = (props) => {
+const AddItem = ({ items, setItems }) => {
 
   let history = useHistory();
 
@@ -13,7 +14,7 @@ const AddItem = (props) => {
     touched: false
   })
 
-  
+
 
   const itemOnChange = (newItem) => { // when user adds this, add 
     setItem({ value: newItem, touched: true })
@@ -21,7 +22,7 @@ const AddItem = (props) => {
 
   const addToList = (e, item) => {
     e.preventDefault();
-
+    ls.addToLocalStorage(item, item)
     const newItem = {
       itemName: item,
       itemType: null
@@ -36,6 +37,8 @@ const AddItem = (props) => {
       .then(res => {
         return res.json();
       })
+    let joined = items.concat(item);
+    setItems([joined])
     history.push('/');
   }
 

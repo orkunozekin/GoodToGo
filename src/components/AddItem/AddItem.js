@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import './AddItem.css';
-import config from '../../config';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
+import axios from 'axios'
+import { FaSpinner } from 'react-icons/fa'
+
+import config from '../../config'
 import ls from '../../Utility/LocalStorage'
 
+import './AddItem.css'
 
 const AddItem = ({ items, setItems }) => {
 
@@ -13,7 +17,7 @@ const AddItem = ({ items, setItems }) => {
     value: '',
     touched: false
   })
-
+  const [loading, setLoading] = useState(false)
 
 
   const itemOnChange = (newItem) => { // when user adds this, add 
@@ -22,34 +26,42 @@ const AddItem = ({ items, setItems }) => {
 
   const addToList = (e, item) => {
     e.preventDefault();
+    setLoading(true)
     ls.addToLocalStorage(item, item)
     const newItem = {
       itemName: item,
       itemType: null
     };
-    fetch(`${config.API_ENDPOINT}/newItem`, {
-      method: 'POST',
-      body: JSON.stringify(newItem),
-      headers: {
-        'content-type': 'application/json',
-      }
+    axios({
+      method: 'post',
+      url: `${config.API_ENDPOINT}/newItem`,
+      data: newItem
     })
-      .then(res => {
-        return res.json();
+      .then((response) => {
+        console.log(response)
+        if (response.data) {
+          let joined = items.concat(item)
+          setItems([joined])
+          setLoading(false)
+          history.push('/')
+        }
       })
-    let joined = items.concat(item);
-    setItems([joined])
-    history.push('/');
   }
+
+
+
 
   return (
     <section>
       <form onSubmit={(e) => addToList(e, item.value)} className="add-item-form">
         <input onChange={e => itemOnChange(e.target.value)} type="text" placeholder="wallet" required />
-        <button type="submit">Add To My List</button>
+        {!loading && <button type="submit">Add To My List</button>}
+        {loading && <button type="submit">
+          <FaSpinner className="load-icon" />
+        </button>}
       </form>
     </section>
   )
 }
 
-export default AddItem;
+export default AddItem

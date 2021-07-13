@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import './Checklist.css';
-import { NavLink } from 'react-router-dom';
-import config from '../../config';
-import { AiFillDelete } from 'react-icons/ai';
+import React, { useEffect, useState } from 'react'
+
+import { NavLink } from 'react-router-dom'
+import { AiFillDelete } from 'react-icons/ai'
+import { FaSpinner } from 'react-icons/fa'
+
+import config from '../../config'
 import ls from '../../Utility/LocalStorage'
+
+import './Checklist.css'
 
 const Checklist = ({ items, setItems }) => {
 
@@ -15,11 +19,15 @@ const Checklist = ({ items, setItems }) => {
     }, [])
 
     const getItems = async () => {
+        setLoading(true)
         const request = await fetch(`${config.API_ENDPOINT}/allItems`);
         const data = await request.json();
         console.log("list of items: ", data);
-        setItems(data);
-        setLoading(true)
+        if (data) {
+            setItems(data);
+            setLoading(false)
+        }
+
     }
 
     //delete an item whose trashcan icon is clicked.
@@ -52,21 +60,23 @@ const Checklist = ({ items, setItems }) => {
 
     return (
         <section className="checklist-wrapper">
-            {items.length > 0 && loading ? <form>
-                <ul>
-                    {items && items.map((item, index) =>
-                        <li key={index}><b>{item.itemName}</b>
-                            <AiFillDelete key={index} onClick={() => deleteItems(item.itemId, item.itemName)} />
-                        </li>
-                    )}
-                </ul>
-            </form> :
-                <h2>Loading...</h2>
+            {items.length > 0 && !loading &&
+                <div>
+                    <form>
+                        <ul>
+                            {items && items.map((item, index) =>
+                                <li key={index}><b>{item.itemName}</b>
+                                    <AiFillDelete key={index} onClick={() => deleteItems(item.itemId, item.itemName)} />
+                                </li>
+                            )}
+                        </ul>
+                    </form>
+                    <NavLink to="/add">
+                        <button className="add-btn">Add More Items</button>
+                    </NavLink>
+                </div>
             }
-
-            <NavLink to="/add">
-                <button className="add-btn">Add More Items</button>
-            </NavLink>
+            {loading && <FaSpinner className="load-icon cl" />}
         </section>
 
     )

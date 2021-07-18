@@ -1,27 +1,46 @@
- .checklist-wrapper>li {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     flex-direction: column;
- }
+.list-wrapper {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
- svg {
-     cursor: pointer;
-     float: right;
-     margin-right: 35px;
-     object-fit: contain;
- }
+.list-item {
+    margin: 1.25rem auto;
+    font-size: 30px;
+    width: 300px;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
- button {
-     cursor: pointer;
-     border-radius: 5px;
-     font-size: 20px;
-     margin-top: 20vw;
-     background-color: darkslateblue;
-     color: wheat;
- }
+.checklist-div {
+    margin: 0 auto;
+}
 
- .cl {
-     margin: 100px auto;
-     font-size: 50px;
- }
+svg {
+    cursor: pointer;
+    float: right;
+    margin-right: 35px;
+    object-fit: contain;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 10rem;
+    background-color: darkslateblue;
+    color: wheat;
+}
+
+.cl {
+    margin: 100px auto;
+    font-size: 50px;
+}
+
+.checklist-wrapper {
+    display: flex;
+}

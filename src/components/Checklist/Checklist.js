@@ -61,16 +61,14 @@ const Checklist = ({ items, setItems }) => {
     return (
         <section className="checklist-wrapper">
             {items.length > 0 && !loading &&
-                <div>
-                    <form>
-                        <ul>
-                            {items && items.map((item, index) =>
-                                <li key={index}><b>{item.itemName}</b>
-                                    <AiFillDelete key={index} onClick={() => deleteItems(item.itemId, item.itemName)} />
-                                </li>
-                            )}
-                        </ul>
-                    </form>
+                <div className="checklist-div">
+                    <ul className="list-wrapper">
+                        {items && items.map((item, index) =>
+                            <li className="list-item" key={index}><b>{item.itemName}</b>
+                                <AiFillDelete key={index} onClick={() => deleteItems(item.itemId, item.itemName)} />
+                            </li>
+                        )}
+                    </ul>
                     <NavLink to="/add">
                         <button className="add-btn">Add More Items</button>
                     </NavLink>

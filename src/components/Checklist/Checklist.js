@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AiFillDelete } from 'react-icons/ai'
 import { FaSpinner } from 'react-icons/fa'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 import config from '../../config'
 import ls from '../../Utility/LocalStorage'
@@ -57,18 +58,37 @@ const Checklist = ({ items, setItems }) => {
     //     setItems(newItemsList)
     // }
 
+    const handleOnDrag = (result) => {
+        if (!result.destination) return;
+        const listItems = Array.from(items)
+        const [reorderedItem] = listItems.splice(result.source.index, 1)
+        listItems.splice(result.destination.index, 0, reorderedItem)
+        setItems(listItems)
+    }
 
     return (
         <section className="checklist-wrapper">
             {items.length > 0 && !loading &&
                 <div className="checklist-div">
-                    <ul className="list-wrapper">
-                        {items && items.map((item, index) =>
-                            <li className="list-item" key={index}><b>{item.itemName}</b>
-                                <AiFillDelete key={index} onClick={() => deleteItems(item.itemId, item.itemName)} />
-                            </li>
-                        )}
-                    </ul>
+                    <DragDropContext onDragEnd={handleOnDrag}>
+                        <Droppable droppableId="list-items">
+                            {(provided) => {
+                                return <ul className="list-wrapper" {...provided.droppableProps} ref={provided.innerRef}>
+                                    {items && items.map(({ itemName, itemId }, index) =>
+                                        <Draggable key={`${itemId}`} draggableId={`${itemId}`} index={index}>
+                                            {(provided) => (
+                                                <li className="list-item" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                                    <b>{itemName}</b>
+                                                    <AiFillDelete key={itemId} onClick={() => deleteItems(itemId, itemName)} />
+                                                </li>
+                                            )}
+                                        </Draggable>
+                                    )}
+                                    {provided.placeholder}
+                                </ul>
+                            }}
+                        </Droppable>
+                    </DragDropContext>
                     <NavLink to="/add">
                         <button className="add-btn">Add More Items</button>
                     </NavLink>
@@ -84,7 +104,6 @@ const Checklist = ({ items, setItems }) => {
                 </div>
             }
         </section>
-
     )
 }
 

@@ -23,7 +23,6 @@ const Checklist = ({ items, setItems }) => {
         setLoading(true)
         const request = await fetch(`${config.API_ENDPOINT}/allItems`);
         const data = await request.json();
-        console.log("list of items: ", data);
         if (data) {
             setItems(data);
             setLoading(false)

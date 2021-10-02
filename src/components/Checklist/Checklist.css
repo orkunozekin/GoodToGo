@@ -7,7 +7,7 @@
 }
 
 .list-item {
-    margin: 1.25rem auto;
+    margin: 0.8rem auto;
     font-size: 30px;
     width: 300px;
     max-width: 400px;
@@ -43,4 +43,8 @@ button {
 
 .checklist-wrapper {
     display: flex;
+}
+
+.empty-list {
+    margin: 0 auto;
 }

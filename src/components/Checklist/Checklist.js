@@ -76,7 +76,7 @@ const Checklist = ({ items, setItems }) => {
             }
             {loading && <FaSpinner className="load-icon cl" />}
             {items.length === 0 && !loading &&
-                <div>
+                <div className="empty-list">
                     <h2>Your list is empty</h2>
                     <NavLink to="/add">
                         <button className="add-btn">Add Items</button>

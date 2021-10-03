@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.list-item:hover {
+    border: red 1px solid;
+}
+
 .checklist-div {
     margin: 0 auto;
 }

@@ -4,6 +4,7 @@ import Header from '../components/Header/Header';
 import AddItem from '../components/AddItem/AddItem';
 import { Route, Switch } from 'react-router-dom';
 import Checklist from '../components/Checklist/Checklist';
+import Chart from '../Chart/Chart';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route exact path='/add'>
           <AddItem items={items} setItems={setItems} />
         </Route>
+        <Route exact path='/chart' component={Chart} />
       </Switch>
     </main>
   );

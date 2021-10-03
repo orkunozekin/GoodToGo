@@ -52,11 +52,6 @@ const Checklist = ({ items, setItems }) => {
     }
 
 
-    // const checkOffItems = (itemId) => {
-    //     const newItemsList = items.filter(item => item.id !== itemId)
-    //     setItems(newItemsList)
-    // }
-
     const handleOnDrag = (result) => {
         if (!result.destination) return;
         const listItems = Array.from(items)

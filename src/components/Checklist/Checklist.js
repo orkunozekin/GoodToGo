@@ -72,7 +72,7 @@ const Checklist = ({ items, setItems }) => {
                                         <Draggable key={`${itemId}`} draggableId={`${itemId}`} index={index}>
                                             {(provided) => (
                                                 <li className="list-item" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                    <b>{itemName}</b>
+                                                    <b className="item-name">{itemName}</b>
                                                     <AiFillDelete key={itemId} onClick={() => deleteItems(itemId, itemName)} />
                                                 </li>
                                             )}
